@@ -24,6 +24,7 @@
 
     <modules>
         <!-- added one by one as we build them -->
+        <module>services/identity-service</module>
     </modules>
 
     <dependencyManagement>

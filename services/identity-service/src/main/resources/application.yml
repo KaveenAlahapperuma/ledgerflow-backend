@@ -1,0 +1,27 @@
+server:
+  port: 9000
+
+spring:
+  application:
+    name: identity-service
+  profiles:
+    default: dev            # used when no profile is given (your laptop)
+
+  datasource:
+    url: jdbc:postgresql://localhost:15432/identity_db
+    username: ${IDENTITY_DB_USER:identity_user}
+    password: ${IDENTITY_DB_PASSWORD:identity_pass}
+
+  jpa:
+    open-in-view: false     # no lazy DB queries while rendering responses
+    hibernate:
+      ddl-auto: validate    # Flyway owns the schema; Hibernate only checks it
+
+  flyway:
+    locations: classpath:db/migration
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info

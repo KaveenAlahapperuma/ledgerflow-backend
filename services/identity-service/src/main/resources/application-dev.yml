@@ -1,0 +1,4 @@
+# Only active in the "dev" profile: also load demo data.
+spring:
+  flyway:
+    locations: classpath:db/migration,classpath:db/seed
