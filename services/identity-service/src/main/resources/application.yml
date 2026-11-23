@@ -25,3 +25,9 @@ management:
     web:
       exposure:
         include: health,info
+
+# LedgerFlow's own settings for the authorization server
+ledgerflow:
+  auth:
+    issuer: http://localhost:9000           # the "iss" claim in every token
+    internal-client-secret: ${INTERNAL_CLIENT_SECRET:internal-secret}
