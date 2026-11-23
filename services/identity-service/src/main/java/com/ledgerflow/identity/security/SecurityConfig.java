@@ -24,7 +24,9 @@ public class SecurityConfig {
                         .requestMatchers("/actuator/health", "/actuator/info").permitAll()
                         .anyRequest().authenticated())
                 // The login page users see when the authorization server needs them to sign in.
-                .formLogin(Customizer.withDefaults());
+                .formLogin(Customizer.withDefaults())
+                // Also accept "Authorization: Bearer <JWT>", e.g. requests coming through the gateway.
+                .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));
         // httpBasic removed: from now on, clients get tokens through OAuth2 instead.
         return http.build();
     }

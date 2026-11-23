@@ -20,4 +20,14 @@ public interface UserAccountRepository extends JpaRepository<UserAccount, UUID> 
             where lower(u.email) = lower(:email)
             """)
     Optional<UserAccount> findByEmailWithRoles(@Param("email") String email);
+
+    /**
+     * Same, but by ID: used when the caller is identified by a JWT, whose "sub" is the user ID.
+     */
+    @Query("""
+            select u from UserAccount u
+            left join fetch u.roles
+            where u.id = :id
+            """)
+    Optional<UserAccount> findByIdWithRoles(@Param("id") UUID id);
 }
